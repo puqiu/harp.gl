@@ -431,7 +431,7 @@ export interface MapViewOptions extends TextElementsRendererOptions {
      *
      * To disable a cache search, set the value to `0`.
      *
-     * @default [[MapViewDefaults.quadTreeSeaFIX]]
+     * @default [[MapViewDefaults.quadTreeSearchDistanceDown]]
      */
     quadTreeSearchDistanceDown?: number;
 
