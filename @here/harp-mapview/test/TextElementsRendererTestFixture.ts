@@ -49,7 +49,9 @@ function createViewState(worldCenter: THREE.Vector3): ViewState {
         lookAtDistance: 0,
         isDynamic: false,
         hiddenGeometryKinds: undefined,
-        renderedTilesChanged: false
+        renderedTilesChanged: false,
+        projection: mercatorProjection,
+        elevationProvider: undefined
     };
 }
 
@@ -89,7 +91,6 @@ function createScreenProjector(): ScreenProjector {
  */
 export class TestFixture {
     private readonly m_screenCollisions: ScreenCollisions;
-    private readonly m_projection: Projection = mercatorProjection;
     private readonly tileLists: DataSourceTileList[] = [];
     private readonly m_poiRendererStub: sinon.SinonStubbedInstance<PoiRenderer>;
     private readonly m_renderPoiSpy: sinon.SinonSpy;
@@ -166,7 +167,7 @@ export class TestFixture {
         );
         // Force renderer initialization by calling render with changed text elements.
         const time = 0;
-        this.m_textRenderer.placeText(this.tileLists, this.m_projection, time);
+        this.m_textRenderer.placeText(this.tileLists, time);
         this.clearVisibleTiles();
         return this.m_textRenderer.waitInitialized();
     }
@@ -253,7 +254,7 @@ export class TestFixture {
             this.m_viewState.renderedTilesChanged = this.setVisibleTiles(tileIndices);
         }
         this.m_viewState.frameNumber++;
-        this.textRenderer.placeText(this.tileLists, this.m_projection, time);
+        this.textRenderer.placeText(this.tileLists, time);
     }
 
     private get textRenderer(): TextElementsRenderer {

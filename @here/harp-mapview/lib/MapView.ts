@@ -1398,6 +1398,7 @@ export class MapView extends THREE.EventDispatcher {
      */
     addEventListener(type: MapViewEventNames, listener: (event: RenderEvent) => void): void;
 
+    /** @override */
     addEventListener(type: string, listener: any): void {
         super.addEventListener(type, listener);
     }
@@ -1418,6 +1419,7 @@ export class MapView extends THREE.EventDispatcher {
      */
     removeEventListener(type: MapViewEventNames, listener: (event: RenderEvent) => void): void;
 
+    /** @override */
     removeEventListener(type: string, listener: any): void {
         super.removeEventListener(type, listener);
     }
@@ -2966,11 +2968,7 @@ export class MapView extends THREE.EventDispatcher {
             return;
         }
 
-        this.m_textElementsRenderer.placeText(
-            this.m_visibleTiles.dataSourceTileList,
-            this.projection,
-            time
-        );
+        this.m_textElementsRenderer.placeText(this.m_visibleTiles.dataSourceTileList, time);
     }
 
     private finishRenderTextElements() {
