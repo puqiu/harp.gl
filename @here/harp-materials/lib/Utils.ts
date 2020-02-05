@@ -6,6 +6,7 @@
 
 import { assert } from "@here/harp-utils";
 import * as THREE from "three";
+import { DisplacementFeature } from "./DisplacementFeature";
 
 /**
  * Values for boolean shader defines
@@ -243,4 +244,8 @@ export function getShaderDefine(defines: { [key: string]: any }, key: string): b
             ? true
             : currentValue;
     return semanticValue;
+}
+
+export function hasDisplacementFeature(material: any): material is DisplacementFeature {
+    return "setDisplacementMap" in material;
 }
